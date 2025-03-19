@@ -147,7 +147,7 @@ const PriestSelection = ({ priests, onSubmit, onBack }: PriestSelectionProps) =>
                 <SelectValue placeholder="Language" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">All Languages</SelectItem>
+                <SelectItem value="all">All Languages</SelectItem>
                 {allLanguages.map((language) => (
                   <SelectItem key={language} value={language}>
                     {language}
@@ -166,7 +166,7 @@ const PriestSelection = ({ priests, onSubmit, onBack }: PriestSelectionProps) =>
                 <SelectValue placeholder="Experience" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">Any Experience</SelectItem>
+                <SelectItem value="any">Any Experience</SelectItem>
                 <SelectItem value="5">5+ Years</SelectItem>
                 <SelectItem value="10">10+ Years</SelectItem>
                 <SelectItem value="20">20+ Years</SelectItem>
@@ -184,7 +184,7 @@ const PriestSelection = ({ priests, onSubmit, onBack }: PriestSelectionProps) =>
                 <SelectValue placeholder="Rating" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">Any Rating</SelectItem>
+                <SelectItem value="any">Any Rating</SelectItem>
                 <SelectItem value="4">4+ Stars</SelectItem>
                 <SelectItem value="4.5">4.5+ Stars</SelectItem>
                 <SelectItem value="4.8">4.8+ Stars</SelectItem>

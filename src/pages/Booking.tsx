@@ -35,21 +35,45 @@ const Booking = () => {
     return () => clearTimeout(timer);
   }, [id, navigate]);
 
+  // Add a listener for browser back/forward buttons to update our steps
+  useEffect(() => {
+    const handlePopState = () => {
+      // If we're going back, update our internal step state
+      if (step > 1) {
+        setStep(step - 1);
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [step]);
+
   const handleBookingFormSubmit = (data: BookingDetails) => {
     setBookingDetails(data);
     window.scrollTo(0, 0);
     setStep(2);
+    // Add browser history entry
+    window.history.pushState(null, '', window.location.pathname);
   };
 
   const handlePriestSelection = (priestId: string) => {
     setSelectedPriestId(priestId);
     window.scrollTo(0, 0);
     setStep(3);
+    // Add browser history entry
+    window.history.pushState(null, '', window.location.pathname);
   };
 
   const handleComplete = () => {
     navigate('/');
     toast.success('Booking completed successfully! Check your email for details.');
+  };
+
+  const handleStepChange = (newStep: number) => {
+    if (newStep < step) {
+      setStep(newStep);
+      window.scrollTo(0, 0);
+    }
   };
 
   const renderStepContent = () => {
@@ -90,9 +114,9 @@ const Booking = () => {
   if (isLoading) {
     return (
       <div className="max-w-3xl mx-auto px-4 sm:px-6 py-12">
-        <div className="animate-shimmer h-8 w-48 rounded-md mb-8"></div>
-        <div className="animate-shimmer h-4 w-full rounded-md mb-4"></div>
-        <div className="animate-shimmer h-64 w-full rounded-md"></div>
+        <div className="animate-pulse h-8 w-48 bg-muted rounded-md mb-8"></div>
+        <div className="animate-pulse h-4 w-full bg-muted rounded-md mb-4"></div>
+        <div className="animate-pulse h-64 w-full bg-muted rounded-md"></div>
       </div>
     );
   }
@@ -111,7 +135,7 @@ const Booking = () => {
 
         <BookingSteps 
           currentStep={step} 
-          setStep={setStep} 
+          setStep={handleStepChange} 
           allowNavigation={step > 1}
         />
 

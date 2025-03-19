@@ -35,17 +35,19 @@ const BookingSteps = ({ currentStep, setStep, allowNavigation = false }: Booking
         {steps.map((step, i) => (
           <div 
             key={step.number} 
-            className="flex flex-col items-center relative"
+            className={`flex flex-col items-center relative ${
+              allowNavigation && step.number < currentStep ? "cursor-pointer" : ""
+            }`}
             onClick={() => handleStepClick(step.number)}
           >
             <div 
-              className={`step-number ${
+              className={`w-9 h-9 rounded-full flex items-center justify-center text-sm font-medium ${
                 currentStep > step.number 
-                  ? "completed" 
+                  ? "bg-primary text-primary-foreground" 
                   : currentStep === step.number 
-                  ? "active" 
-                  : ""
-              } ${allowNavigation && step.number < currentStep ? "cursor-pointer" : ""}`}
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-muted text-muted-foreground"
+              }`}
             >
               {currentStep > step.number ? (
                 <Check size={16} />
@@ -66,8 +68,12 @@ const BookingSteps = ({ currentStep, setStep, allowNavigation = false }: Booking
             {/* Connector lines between steps */}
             {i < steps.length - 1 && (
               <div 
-                className={`absolute top-4 left-8 w-[calc(100vw/4)] h-0.5 -z-10 step-connector ${
-                  currentStep > step.number ? "active" : ""
+                className={`absolute top-4 left-10 w-[calc(100%-2.5rem)] h-0.5 -z-10 ${
+                  currentStep > step.number + 1 
+                    ? "bg-primary" 
+                    : currentStep > step.number
+                    ? "bg-primary"
+                    : "bg-muted"
                 }`}
               />
             )}
