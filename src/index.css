@@ -186,7 +186,46 @@
   filter: blur(0);
 }
 
-/* Progress stepper */
+/* 3D card effect */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+/* Animation delays */
+.animation-delay-100 {
+  animation-delay: 100ms;
+}
+
+.animation-delay-200 {
+  animation-delay: 200ms;
+}
+
+.animation-delay-300 {
+  animation-delay: 300ms;
+}
+
+.animation-delay-500 {
+  animation-delay: 500ms;
+}
+
+/* 3D transform utilities */
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+.rotate-x-180 {
+  transform: rotateX(180deg);
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+/* Progress stepper with improved styling */
 .step-connector {
   height: 3px;
   @apply bg-muted transition-colors duration-300;
